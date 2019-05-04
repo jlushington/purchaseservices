@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +28,16 @@ Logger log = LoggerFactory.getLogger(PurchaseController.class);
 	@Autowired
 	PurchaseService service;
 	
+	@CrossOrigin(origins = "*") //TODO: NEED TO REMOVE AND INIT PROPER CORS
 	@PostMapping(value = "/purchase", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Mono<String> Purchase(@RequestBody String request){
     	return service.Store(gson.fromJson(request, PurchaseModel.class));
+    }
+	
+	@CrossOrigin(origins = "*") //TODO: NEED TO REMOVE AND INIT PROPER CORS
+	@PostMapping(value = "/purchasesuccessful", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Mono<String> PurchaseSuccessful(@RequestBody String request){
+    	return service.PaymentSuccessful(gson.fromJson(request, PurchaseModel.class));
     }
 
 }

@@ -9,8 +9,8 @@ public class Global {
 		CURRENCYCND("CND"),
 		PAYMENTMETHOD("paypal"),
 		PAYMENTINTENTSALE("sale"),
-		CANCELURL("http://localhost:8080/cancel"),
-		RETURNURL("http://localhost:8080/"),
+		CANCELURL("http://localhost:8080/paymentcancel"),
+		RETURNURL("http://localhost:8080/paymentsuccessful"),
 		ENVSTANDBOX("sandbox"),
 		SECRET("EP1e3mRwChT-37Xo43t8-PXJmAQ14jW51Gj0FJaD8MhmelsFlbZjynXdNzTBTkD1AvvyA_DjpsJWAri1");
 		

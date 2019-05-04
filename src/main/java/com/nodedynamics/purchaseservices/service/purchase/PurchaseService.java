@@ -47,6 +47,25 @@ public class PurchaseService implements BaseService<PurchaseModel>{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public Mono<String>PaymentSuccessful(PurchaseModel Model){
+		
+		log.info("PurchaseService->PaymentSuccessful");
+		
+		String ReturnMessage = null;
+		
+		repo.save(Model);
+		
+		ReturnMessage=gson.toJson(ResponseModel.builder()
+				.MessageTypeID(Global.MessageTypeID.SUCCESS.key)
+				.MessageType(Global.MessageType.SUCCESS.key)
+				.Message("Purchase Successful")
+				.build());
+		
+		return Mono.just(ReturnMessage);
+		
+		
+	}
 
 	@Override
 	public Mono<String> Store(PurchaseModel Model) {
@@ -55,7 +74,8 @@ public class PurchaseService implements BaseService<PurchaseModel>{
 		
 		//PAYPAL PURCHASE - SHOULD BE UPDATE WITH MORE ABSTRACTION
 		Amount amount = new Amount();
-		amount.setCurrency(Global.PayPalData.CURRENCYCND.key);
+		//amount.setCurrency(Global.PayPalData.CURRENCYCND.key);
+		amount.setCurrency(Global.PayPalData.CURRENCYUSD.key);
 		amount.setTotal(Model.getPurchaseSum());
 		
 		Transaction transaction = new Transaction();
